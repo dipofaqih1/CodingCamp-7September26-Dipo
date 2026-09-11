@@ -1,0 +1,83 @@
+# =============================================================
+#  config.kiro — Life Dashboard
+#  Kiro IDE project configuration
+# =============================================================
+
+[project]
+name        = "Life Dashboard"
+description = "A personal browser dashboard with clock, greeting, focus timer, to-do list, and quick links."
+version     = "1.0.0"
+type        = "static-web"
+
+# Entry point opened when you press "Open in Browser" or run a preview
+entry       = "index.html"
+
+# =============================================================
+#  Source layout
+# =============================================================
+[structure]
+html   = "index.html"
+css    = "css/style.css"
+js     = "js/app.js"
+readme = "README.md"
+docs   = "requirements.md"
+
+# =============================================================
+#  Technology stack (informational — no build step needed)
+# =============================================================
+[stack]
+html       = "HTML5"
+css        = "CSS3 (custom properties, grid, flexbox)"
+javascript = "Vanilla ES2020 (no frameworks, no bundler)"
+storage    = "Browser localStorage (client-side only)"
+fonts      = "Segoe UI / system-ui (no external font CDN)"
+
+# =============================================================
+#  Features
+# =============================================================
+[features]
+clock_and_date       = true   # Live HH:MM:SS + full date in header
+greeting             = true   # Time-aware greeting (morning / afternoon / evening / night)
+custom_name          = true   # User-configurable name saved to localStorage
+dark_mode            = true   # Light / dark toggle, persisted
+focus_timer          = true   # Pomodoro-style countdown with progress bar
+custom_pomodoro_time = true   # User-editable work and break durations (1–120 / 1–60 min)
+timer_auto_switch    = true   # Work → Break → Work cycle with browser notifications
+todo_list            = true   # Add / edit / complete / delete tasks
+todo_filter          = true   # Filter tasks: All / Active / Done
+todo_persistence     = true   # Tasks saved to localStorage
+quick_links          = true   # Add / remove favourite site links
+links_favicon        = true   # Auto-fetches site favicons via Google S2 API
+links_persistence    = true   # Links saved to localStorage
+links_defaults       = true   # Ships with GitHub, Google, YouTube pre-loaded
+
+# =============================================================
+#  localStorage keys (all data is client-side)
+# =============================================================
+[storage.keys]
+theme        = "dashboard_theme"     # "light" | "dark"
+name         = "dashboard_name"      # string
+tasks        = "dashboard_tasks"     # JSON array of { id, text, done }
+links        = "dashboard_links"     # JSON array of { id, name, url }
+timer_work   = "timer_work_mins"     # number (default 25)
+timer_break  = "timer_break_mins"    # number (default 5)
+timer_sessions = "timer_sessions"   # number (session counter)
+
+# =============================================================
+#  Browser compatibility
+# =============================================================
+[compatibility]
+chrome  = ">=90"
+firefox = ">=88"
+edge    = ">=90"
+safari  = ">=14"
+note    = "No polyfills required. Uses CSS custom properties, CSS Grid, ES2020 features (optional chaining not used), and the Web Notifications API (optional)."
+
+# =============================================================
+#  Development notes
+# =============================================================
+[dev]
+no_dependencies   = true    # Zero npm packages, no package.json needed
+no_build_required = true    # Open index.html directly in a browser
+no_test_setup     = true    # No test framework configured (per NFR-1)
+linting           = "none"  # Add ESLint manually if desired
